@@ -36,7 +36,7 @@ public class Main {
         System.out.println("Get registered vehicles:");
         printBasicInfo(vehicleList);
 
-        // Extent-persistency - sve registered vehicles to the file
+        // Extent-persistency - save registered vehicles to the file
         VehicleManager.saveRegisteredVehiclesToFile();
 
         // Removing vehicle from extent
@@ -64,6 +64,14 @@ public class Main {
         // Derived attribute
         System.out.println("New unique ID: " + bmw.generateUniqueId());
 
+        // complex
+        Engine engineToTest = new Engine(EngineType.ELECTRICITY, 143);
+        bmw.setEngine(engineToTest);
+        System.out.println(bmw.getBasicVehicleInfo());
+
+        // class attribute
+        System.out.println("Max amount of vehicles, which can be added to the system: " +
+                VehicleManager.MAX_AMOUNT_OF_VEHICLES);
     }
 
     public static void printBasicInfo(List<Vehicle> vehicleList) {

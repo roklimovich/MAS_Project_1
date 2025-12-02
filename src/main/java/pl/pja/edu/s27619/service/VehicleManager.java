@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class VehicleManager {
+    public static final int MAX_AMOUNT_OF_VEHICLES = 2500000;
     private static final String FILE_NAME = "./Vehicle.ser";
 
     private static List<Vehicle> registeredVehicles = new ArrayList<>();
@@ -20,9 +21,11 @@ public class VehicleManager {
      */
     public static void saveRegisteredVehiclesToFile() {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(FILE_NAME);
-            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(registeredVehicles);
+            if (registeredVehicles.size() <= MAX_AMOUNT_OF_VEHICLES) {
+                FileOutputStream fileOutputStream = new FileOutputStream(FILE_NAME);
+                ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+                objectOutputStream.writeObject(registeredVehicles);
+            }
         } catch (IOException e) {
             System.out.println("No possibility to save registered vehicles to file " + e.getMessage());
         }
@@ -40,5 +43,6 @@ public class VehicleManager {
             System.out.println("No possibility to load registered vehicle from file " + e.getMessage());
         }
     }
+
 
 }
